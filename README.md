@@ -50,3 +50,7 @@ db.Users.find().limit(2)
 db.Posts.find({ title: { $in: ["One day","About"] } }).limit(2);
 
 db.Users.deleteMany({age:{$gt:30}})
+
+db.Posts.find().forEach(function(publicacion) {db.Posts.updateOne({ title: publicacion.title },{$set: {cuentaComent: publicacion.comments.length}})})
+
+db.Posts.find({cuentaComent:{$gt:1}})
